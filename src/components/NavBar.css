@@ -1,0 +1,42 @@
+/* NavbarResponsive.css */
+
+@media (max-width: 1024px) {
+    .nav-list {
+      gap: 1.5rem;
+      font-size: 1rem;
+    }
+  
+    .logo-image {
+      height: 35px !important;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .nav-list {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .nav-item {
+      font-size: 1rem;
+    }
+  
+    .logo-image {
+      height: 32px !important;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .logo-image {
+      height: 28px !important;
+    }
+  
+    .menu-button {
+      margin-right: 0.5rem !important;
+    }
+  
+    .mobile-menu {
+      font-size: 0.95rem;
+    }
+  }
+  
