@@ -4,6 +4,9 @@ import bgImage from "../../assets/images/NewsLetter2.png";
 
 const Newsletter = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState(""); // "success" or "error"
+  const [showMessage, setShowMessage] = useState(false);
 
   useEffect(() => {
     const handleResize = () => setScreenWidth(window.innerWidth);
@@ -11,7 +14,6 @@ const Newsletter = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Responsive values
   const isTablet = screenWidth <= 768;
   const isMobile = screenWidth <= 480;
 
@@ -26,7 +28,7 @@ const Newsletter = () => {
       alignItems: "center",
       flexDirection: "column",
       position: "relative",
-      minHeight: "100vh",
+      minHeight: "50vh",
     },
 
     card: {
@@ -34,7 +36,7 @@ const Newsletter = () => {
       borderRadius: "20px",
       padding: "2rem 1rem",
       maxWidth: "600px",
-      width: "100%",
+      width: "90%",
       border: "2px solid #54d5d9",
       boxShadow: "0 0 20px #00fff7",
       backdropFilter: "blur(14px)",
@@ -95,6 +97,24 @@ const Newsletter = () => {
       boxShadow: "0 0 15px rgba(0, 255, 255, 0.4)",
     },
 
+    messageBox: {
+      position: "absolute",
+      top: "10%",
+      left: "50%",
+      transform: "translateX(-50%)",
+      padding: "1rem 2rem",
+      borderRadius: "10px",
+      backgroundColor: messageType === "success" ? "rgba(0, 255, 128, 0.7)" : "rgba(255, 0, 0, 0.7)",
+      border: `1px solid ${messageType === "success" ? "#00ffa2" : "#ff4d4d"}`,
+      color: messageType === "success" ? "#00ffcc" : "#ff4d4d",
+      textAlign: "center",
+      fontWeight: "bold",
+      fontSize: "1rem",
+      animation: "fadeInOut 4s ease-out",
+      zIndex: 10,
+      boxShadow: "0 0 20px rgba(0, 255, 255, 0.7)",
+    },
+
     backgroundGlow: {
       content: '""',
       position: "absolute",
@@ -109,14 +129,27 @@ const Newsletter = () => {
       filter: "blur(60px)",
     },
 
-    // Keyframe as an inline <style> tag content
     keyframes: `
       @keyframes pulse {
         0% { transform: scale(1); box-shadow: 0 0 15px rgba(0, 255, 255, 0.3); }
         50% { transform: scale(1.05); box-shadow: 0 0 25px rgba(0, 200, 255, 0.6); }
         100% { transform: scale(1); box-shadow: 0 0 15px rgba(0, 255, 255, 0.3); }
       }
+
+      @keyframes fadeInOut {
+        0% { opacity: 0; }
+        25% { opacity: 1; }
+        75% { opacity: 1; }
+        100% { opacity: 0; }
+      }
     `,
+  };
+
+  const showMessageBox = (msg, type) => {
+    setMessage(msg);
+    setMessageType(type);
+    setShowMessage(true);
+    setTimeout(() => setShowMessage(false), 4000); // Hide message after 4 seconds
   };
 
   return (
@@ -139,7 +172,30 @@ const Newsletter = () => {
             style={styles.form}
             onSubmit={(e) => {
               e.preventDefault();
-              alert("You're in! 🔮");
+              const emailInput = e.target.elements[0].value;
+
+              fetch("https://script.google.com/macros/s/AKfycbzDx5fbFmP9KMhwaTHGbgTIIfXFzrev9d6DZlq7jju_nLjlTuhgvMMf6vSIP60diYNd/exec", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: new URLSearchParams({
+                  email: emailInput,
+                }),
+              })
+                .then((res) => res.text())
+                .then((resText) => {
+                  if (resText === "Success") {
+                    showMessageBox("You're in! 🔮", "success");
+                    e.target.reset();
+                  } else {
+                    showMessageBox("Something went wrong. Try again!", "error");
+                  }
+                })
+                .catch((err) => {
+                  console.error("Error submitting to Google Sheets:", err);
+                  showMessageBox("Failed to subscribe. Please try later.", "error");
+                });
             }}
           >
             <input
@@ -153,6 +209,12 @@ const Newsletter = () => {
             </button>
           </form>
         </motion.div>
+
+        {showMessage && (
+          <div style={styles.messageBox}>
+            {message}
+          </div>
+        )}
       </section>
     </>
   );
