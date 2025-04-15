@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-const mediaPartners = [];
+import forbesLogo from "../../assets/images/forbesLogo.png"
+const mediaPartners = [{
+  name: "Partner 1",
+  logo: forbesLogo,
+},];
 
 const styles = {
   section: {
@@ -71,7 +75,7 @@ const styles = {
   },
 
   button: {
-    marginTop: "-0.5rem",
+    marginTop: "2rem",
     backgroundColor: "#00ffff",
     color: "#000",
     padding: "0.75rem 2rem",

@@ -103,7 +103,7 @@ const Footer = () => {
           />
         </div>
 
-        <p style={glowText}>© 2025 Wallet Hunter Shows | Forbes Edition</p>
+        <p style={glowText}>© 2025 Wallet Hunter Shows | Forbes Web3 Edition</p>
         <p style={smallText}>Crafted with 💡 by Wallet Hunter</p>
 
         <div style={linkGroup}>

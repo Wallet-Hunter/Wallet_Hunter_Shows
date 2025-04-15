@@ -285,7 +285,7 @@ const HeroSection = () => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <span className="forbes-highlight">Forbes Edition</span>
+              <span className="forbes-highlight">Forbes Web3 Edition</span>
             </motion.h2>
           </motion.div>
 
