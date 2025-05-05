@@ -55,7 +55,7 @@ const AppRoutes = () => {
     <Router>
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/be-a-media-partner" element={<CommunityPartnerForm />} />
+        <Route path="/affiliatepartner" element={<CommunityPartnerForm />} />
         <Route path="/mediapartnerform" element={<MediaPartnerForm />} />
       </Routes>
     </Router>

@@ -138,7 +138,7 @@ const CommunityPartners = () => {
 
       <button
         style={styles.button}
-        onClick={() => navigate("/be-a-media-partner")}
+        onClick={() => navigate("/affiliatepartner")}
       >
         BECOME PARTNER
       </button>

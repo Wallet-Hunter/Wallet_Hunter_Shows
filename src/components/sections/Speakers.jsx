@@ -14,12 +14,12 @@ import MikeProfile from "../../assets/images/speakers/MikeProfile.jpg";
 
 const speakerData = [
   {
-    name: "Yevheniia Broshevan",
-    image: YevheniiaBroshevanProfile,
-    description: "Co-Founder @ Hacken",
-    twitter: "https://x.com/jerh17",
-    linkedin: "https://www.linkedin.com/in/broshevan/",
-    telegram: "https://web.telegram.org/k/#@jerh17",
+    name: "NFTDUDU",
+    image: NFTDUDUProfile,
+    description: "",
+    twitter: "https://x.com/NFT_DUDU",
+    //linkedin: "https://linkedin.com/in/lunaprotocol",
+    telegram: "https://web.telegram.org/k/#@NFTDUDU",
   },
   {
     name: "Hicham",
@@ -37,13 +37,14 @@ const speakerData = [
     linkedin: "https://www.linkedin.com/in/vincenzostefanini/?originalSubdomain=uk",
     telegram: "https://web.telegram.org/k/#@vincenzost",
   },
+  
   {
-    name: "NFTDUDU",
-    image: NFTDUDUProfile,
-    description: "",
-    twitter: "https://x.com/NFT_DUDU",
-    //linkedin: "https://linkedin.com/in/lunaprotocol",
-    telegram: "https://web.telegram.org/k/#@NFTDUDU",
+    name: "Yevheniia Broshevan",
+    image: YevheniiaBroshevanProfile,
+    description: "Co-Founder @ Hacken",
+    twitter: "https://x.com/jerh17",
+    linkedin: "https://www.linkedin.com/in/broshevan/",
+    telegram: "https://web.telegram.org/k/#@jerh17",
   },
 
   {
@@ -197,16 +198,23 @@ const Speakers = () => {
               <h3 style={styles.name}>{speaker.name}</h3>
               <p style={styles.description}>{speaker.description}</p>
               <div style={styles.socials}>
-                <a href={speaker.twitter} target="_blank" rel="noreferrer">
-                  <FaTwitter style={styles.icon} />
-                </a>
-                <a href={speaker.linkedin} target="_blank" rel="noreferrer">
-                  <FaLinkedin style={styles.icon} />
-                </a>
-                <a href={speaker.telegram} target="_blank" rel="noreferrer">
-                  <FaTelegramPlane style={styles.icon} />
-                </a>
-              </div>
+  {speaker.twitter && (
+    <a href={speaker.twitter} target="_blank" rel="noreferrer">
+      <FaTwitter style={styles.icon} />
+    </a>
+  )}
+  {speaker.linkedin && (
+    <a href={speaker.linkedin} target="_blank" rel="noreferrer">
+      <FaLinkedin style={styles.icon} />
+    </a>
+  )}
+  {speaker.telegram && (
+    <a href={speaker.telegram} target="_blank" rel="noreferrer">
+      <FaTelegramPlane style={styles.icon} />
+    </a>
+  )}
+</div>
+
             </motion.div>
           ))}
         </div>
